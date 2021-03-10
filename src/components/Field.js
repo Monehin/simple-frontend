@@ -46,8 +46,8 @@ const Input = ({ label, icon, error, touched, ...rest }) => {
         ) : null}
       </div>
       {showError && (
-        <span className='my-2 text-danger text-sm flex items-center'>
-          <ExclamationCircleFilled className='mr-2' />
+        <span className='my-2 text-danger text-sm text-gray-400 flex items-center'>
+          <ExclamationCircleFilled className='mr-2 text-red-400' />
           {error}
         </span>
       )}
