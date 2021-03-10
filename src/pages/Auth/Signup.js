@@ -101,7 +101,7 @@ const Login = () => {
                     <Button
                       className='w-24 mt-3 focus:outline-none'
                       type='submit'
-                      disabled={!(isValid && dirty)}
+                      disabled={!(isValid && dirty) || isSubmitting}
                     >
                       {' '}
                       Sign Up
