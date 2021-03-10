@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext } from 'react';
 const initialState = {
   isAuthenticated: null,
   user: null,
+  isLoading: true,
 };
 
 const useMyState = () => useState(initialState);

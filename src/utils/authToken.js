@@ -1,7 +1,7 @@
 export const getStoredAuthToken = () => {
   const auth = JSON.parse(window.localStorage.getItem('authToken'));
   if (!auth) return null;
-  const exp = getExpirationDate(auth.jwt);
+  const exp = getExpirationDate(auth);
   if (isExpired(exp)) {
     removeStoredAuthToken();
   } else {

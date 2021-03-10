@@ -2,13 +2,19 @@ import React from 'react';
 import Field from '../../components/Field';
 import SignupBg from '../../assets/images/signup-bg.jpeg';
 import Button from '../../components/Button';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { Formik, Form } from 'formik';
-import { SignupSchema } from '../../utils';
+import { useSharedState } from '../../store';
+import { api, SignupSchema, storeAuthToken } from '../../utils';
 
 const Login = () => {
+  const [sharedState, setSharedState] = useSharedState();
+  const alert = useAlert();
+  if (sharedState.isAuthenticated) return <Redirect to='/user' />;
+
   return (
-    <div className='relative min-h-screen bg-red-500 flex justify-center items-center p-5 shadow-lg'>
+    <div className='relative min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex justify-center items-center p-5 shadow-lg'>
       <div className={`relative h-110 w-120 bg-white overflow-hidden`}>
         <div className={`absolute h-full w-full top-0 left-0 flex `}>
           <div
@@ -23,8 +29,29 @@ const Login = () => {
                 confirmPassword: '',
               }}
               validationSchema={SignupSchema}
-              onSubmit={(values) => {
-                console.log(values);
+              onSubmit={async ({ firstName, lastName, email, password }) => {
+                try {
+                  const res = await api.post('auth/register', {
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                  });
+                  const { data } = res;
+                  storeAuthToken(data.token);
+                  setSharedState((prev) => ({
+                    ...prev,
+                    user: data.user,
+                    isAuthenticated: true,
+                  }));
+                } catch (err) {
+                  if (err.response) {
+                    const error = err.response.data.error;
+                    alert.show(error.message, { type: 'error' });
+                  } else {
+                    alert.show('Server Error', { type: 'error' });
+                  }
+                }
               }}
             >
               {({ errors, touched, dirty, isValid, isSubmitting }) => {

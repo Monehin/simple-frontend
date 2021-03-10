@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { getStoredAuthToken } from './authToken';
 
-const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:1337/';
+const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001/api';
 
 axios.defaults.baseURL = baseURL;
 
 axios.interceptors.request.use((request) => {
   const authToken = getStoredAuthToken();
   if (authToken) {
-    request.headers.Authorization = `Bearer ${authToken.jwt}`;
+    request.headers.Authorization = `Bearer ${authToken}`;
   }
   return request;
 });
