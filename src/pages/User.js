@@ -1,11 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSharedState } from '../store';
 import Jokes from './jokes';
+import { removeStoredAuthToken } from '../utils';
 
 const User = () => {
-  const [sharedState] = useSharedState();
+  const [sharedState, setSharedState] = useSharedState();
   const [jokes] = useState([...Jokes]);
   // TODO: Call jokes from api
+
+  const handleLogout = () => {
+    removeStoredAuthToken();
+    setSharedState((prev) => ({
+      ...prev,
+      user: null,
+      isAuthenticated: false,
+      isLoading: false,
+    }));
+  };
 
   const { firstName, lastName } = sharedState.user;
   return (
@@ -19,7 +30,10 @@ const User = () => {
           <div className='rounded-full h-12 w-12 flex items-center justify-center bg-purple-200 font-semibold'>
             {`${firstName.charAt(0)}${lastName.charAt(0)}`}
           </div>
-          <h1 className='h-full bg-blue-400 text-white font-semibold flex items-center px-6 hover:bg-red-400 hover: cursor-pointer'>
+          <h1
+            onClick={handleLogout}
+            className='h-full bg-blue-400 text-white font-semibold flex items-center px-6 hover:bg-red-400 hover: cursor-pointer'
+          >
             Logout
           </h1>
         </div>
@@ -34,7 +48,7 @@ const User = () => {
               ? jokes.map((joke) => (
                   <div
                     key={joke.id}
-                    className='w-full py-2 flex bg-white opacity-70 rounded-xl my-4 px-3'
+                    className='w-full py-2 flex bg-white opacity-90 rounded-xl my-4 px-3'
                   >
                     <div className='textBox  flex-grow flex flex-col justify-center items-center '>
                       <p className='uppercase font-bold text-lg '>
