@@ -39,7 +39,7 @@ const App = () => {
   if (sharedState.isLoading) {
     return (
       <div className='w-screen h-screen flex justify-center items-center'>
-        <span class='animate-ping  inline-flex h-10 w-10 rounded-full bg-purple-400 opacity-75'></span>
+        <span className='animate-ping  inline-flex h-10 w-10 rounded-full bg-purple-400 opacity-75'></span>
       </div>
     );
   }
