@@ -61,7 +61,7 @@ const Login = () => {
                 return (
                   <Form className='w-full'>
                     <h2 className='text-lg font-bold tracking-wide text-center w-full uppercase mb-3'>
-                      Signup
+                      Login
                     </h2>
                     <Field
                       name='email'
