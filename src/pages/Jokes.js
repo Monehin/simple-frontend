@@ -5,13 +5,13 @@ const Jokes = () => {
   const [jokes] = useState([...JokeList]);
 
   return (
-    <div className=' min-h-0 flex flex-col flex-grow'>
-      <div className='h-full p-8 flex flex-col flex-grow overflow-auto'>
+    <div className=' min-h-0 flex flex-col flex-grow mt-6'>
+      <div className='px-8 flex flex-col flex-grow overflow-auto '>
         {jokes.length
           ? jokes.map((joke) => (
               <div
                 key={joke.id}
-                className='w-full py-2 flex bg-white  rounded-xl my-4 px-3'
+                className='w-full py-4 flex bg-white  rounded-xl my-4 px-3'
               >
                 <div className='textBox  flex-grow flex flex-col justify-center items-center '>
                   <p className='uppercase tracking-wide text-lg  text-indigo-500 font-semibold'>

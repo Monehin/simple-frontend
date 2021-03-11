@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert';
 import { Formik, Form } from 'formik';
 import { useSharedState } from '../../store';
 import { api, LoginSchema, storeAuthToken } from '../../utils';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Login = () => {
   const [sharedState, setSharedState] = useSharedState();
@@ -78,12 +79,12 @@ const Login = () => {
                       error={errors.password}
                     />
                     <Button
-                      className='w-24 mt-3 focus:outline-none'
+                      className='w-26 mt-3 focus:outline-none'
                       type='submit'
                       disabled={!(isValid && dirty) || isSubmitting}
                     >
-                      {' '}
-                      Login
+                      &nbsp; Login &nbsp;{' '}
+                      {isSubmitting ? <LoadingOutlined /> : ''}
                     </Button>
 
                     <p className='signup relative mt-3 text-sm text-gray-500'>

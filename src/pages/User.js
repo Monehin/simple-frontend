@@ -52,7 +52,7 @@ const User = () => {
           </li>
         </ul>
 
-        <div className='flex justify-center items-center space-x-3 h-full'>
+        <div className='flex justify-center items-center space-x-5 h-full'>
           <div className='rounded-full h-12 w-12 flex items-center justify-center bg-purple-200 font-semibold'>
             {`${firstName.charAt(0)}${lastName.charAt(0)}`}
           </div>
